@@ -126,8 +126,8 @@ export default function ReceiptPage() {
             <CardContent className="pt-6">
               {/* Tracking Number */}
               <div className="bg-gradient-to-r from-orange to-orange-light p-4 rounded-lg mb-6 text-white">
-                <p className="text-sm font-semibold mb-1">Tracking Number</p>
-                <p className="text-2xl font-bold font-mono">{shipment.tracking_number}</p>
+                <p className="text-xs sm:text-sm font-semibold mb-1">Tracking Number</p>
+                <p className="text-lg sm:text-2xl font-bold font-mono break-all">{shipment.tracking_number}</p>
               </div>
 
               {/* Shipment Details Grid */}
