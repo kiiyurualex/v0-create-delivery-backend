@@ -180,7 +180,7 @@ export function ShipmentForm() {
       notes: "Shipment booked, awaiting pickup",
     });
 
-    router.push(`/track?tracking=${data.tracking_number}`);
+    router.push(`/receipt?tracking=${data.tracking_number}`);
     setLoading(false);
   };
 
