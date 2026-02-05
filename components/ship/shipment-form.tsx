@@ -134,54 +134,76 @@ export function ShipmentForm() {
 
     setLoading(true);
 
-    const selectedOption = SHIPPING_OPTIONS.find(opt => opt.id === formData.shipping_option);
+    try {
+      const selectedOption = SHIPPING_OPTIONS.find(opt => opt.id === formData.shipping_option);
 
-    const { data, error } = await supabase
-      .from("shipments")
-      .insert({
+      console.log("[v0] Booking shipment for user:", user.id);
+      console.log("[v0] Shipment data:", {
         user_id: user.id,
         origin: formData.origin_city,
         destination: formData.destination_city,
-        packaging_type: formData.packaging_type,
-        num_packages: formData.package_count,
-        weight: formData.package_weight,
-        weight_unit: formData.weight_unit,
-        has_insurance: formData.add_insurance,
-        sender_name: formData.sender_name,
-        sender_email: formData.sender_email,
-        sender_phone: formData.sender_phone,
-        recipient_name: formData.recipient_name,
-        recipient_email: formData.recipient_email,
-        recipient_phone: formData.recipient_phone,
-        pickup_date: formData.pickup_date?.toISOString(),
-        estimated_delivery_date: formData.estimated_delivery_date?.toISOString(),
-        shipping_cost: costs.shipping,
-        insurance_cost: costs.insurance,
-        tax_cost: costs.tax,
-        total_cost: costs.total,
-        payment_method: paymentMethod,
+      });
+
+      const { data, error } = await supabase
+        .from("shipments")
+        .insert({
+          user_id: user.id,
+          origin: formData.origin_city,
+          destination: formData.destination_city,
+          packaging_type: formData.packaging_type,
+          num_packages: formData.package_count,
+          weight: formData.package_weight,
+          weight_unit: formData.weight_unit,
+          has_insurance: formData.add_insurance,
+          sender_name: formData.sender_name,
+          sender_email: formData.sender_email,
+          sender_phone: formData.sender_phone,
+          recipient_name: formData.recipient_name,
+          recipient_email: formData.recipient_email,
+          recipient_phone: formData.recipient_phone,
+          pickup_date: formData.pickup_date?.toISOString(),
+          estimated_delivery_date: formData.estimated_delivery_date?.toISOString(),
+          shipping_cost: costs.shipping,
+          insurance_cost: costs.insurance,
+          tax_cost: costs.tax,
+          total_cost: costs.total,
+          payment_method: paymentMethod,
+          status: "pending",
+        })
+        .select()
+        .single();
+
+      if (error) {
+        console.error("[v0] Supabase error:", error);
+        console.error("[v0] Error code:", error.code);
+        console.error("[v0] Error message:", error.message);
+        alert(`Failed to book shipment: ${error.message}`);
+        setLoading(false);
+        return;
+      }
+
+      console.log("[v0] Shipment created successfully:", data);
+
+      // Add initial tracking status
+      const { error: trackingError } = await supabase.from("shipment_status_history").insert({
+        shipment_id: data.id,
         status: "pending",
-      })
-      .select()
-      .single();
+        location: formData.origin_city,
+        notes: "Shipment booked, awaiting pickup",
+      });
 
-    if (error) {
-      console.error("Error creating shipment:", error);
-      alert("Failed to book shipment. Please try again.");
+      if (trackingError) {
+        console.error("[v0] Tracking error:", trackingError);
+      }
+
+      console.log("[v0] Redirecting to receipt with tracking:", data.tracking_number);
+      router.push(`/receipt?tracking=${data.tracking_number}`);
+    } catch (err) {
+      console.error("[v0] Unexpected error:", err);
+      alert("An unexpected error occurred. Please try again.");
+    } finally {
       setLoading(false);
-      return;
     }
-
-    // Add initial tracking status
-    await supabase.from("shipment_status_history").insert({
-      shipment_id: data.id,
-      status: "pending",
-      location: formData.origin_city,
-      notes: "Shipment booked, awaiting pickup",
-    });
-
-    router.push(`/receipt?tracking=${data.tracking_number}`);
-    setLoading(false);
   };
 
   return (
