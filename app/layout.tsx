@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   title: 'Antex Deliveries - Fast & Reliable Delivery Services',
   description: 'Experience lightning-fast delivery with real-time tracking. Your packages, delivered safely and on time, every time.',
   generator: 'v0.app',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
   icons: {
     icon: [
       {
