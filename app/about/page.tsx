@@ -36,7 +36,7 @@ export default function AboutPage() {
               {/* Image/Illustration */}
               <div className="relative">
                 <div className="bg-gradient-to-br from-orange to-orange-light rounded-2xl p-12 flex items-center justify-center">
-                  <Globe className="w-48 h-48 text-teal" strokeWidth={1} />
+                  <MapPin className="w-48 h-48 text-teal" strokeWidth={1} />
                 </div>
               </div>
 
