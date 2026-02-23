@@ -186,11 +186,11 @@ export default function ReceiptPage() {
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-gray-700">
                   <span>Shipping Cost:</span>
-                  <span className="font-semibold">${shipment.total_cost.toFixed(2)}</span>
+                  <span className="font-semibold">KES {shipment.total_cost.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between items-center pt-3 border-t-2 border-purple">
                   <span className="text-lg font-bold text-purple">Total Amount:</span>
-                  <span className="text-2xl font-bold text-orange">${shipment.total_cost.toFixed(2)}</span>
+                  <span className="text-2xl font-bold text-orange">KES {shipment.total_cost.toFixed(2)}</span>
                 </div>
               </div>
 
@@ -249,7 +249,7 @@ export default function ReceiptPage() {
           {/* Info Message */}
           <div className="mt-8 p-4 bg-teal-50 border border-teal rounded-lg">
             <p className="text-sm text-teal-900">
-              📧 A confirmation email has been sent to your email address. You can track your shipment anytime using your tracking number.
+              A confirmation email has been sent to your email address. Your shipment will be securely transported by G4S. Track your package anytime using your tracking number.
             </p>
           </div>
         </div>
