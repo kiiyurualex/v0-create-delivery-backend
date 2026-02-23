@@ -1,25 +1,25 @@
-import { Shield, Clock, Globe, Headphones } from "lucide-react";
+import { Shield, Clock, MapPin, Headphones } from "lucide-react";
 
 const features = [
   {
     icon: Clock,
-    title: "Express Delivery",
-    description: "Get your packages delivered within 24-48 hours with our express shipping option.",
+    title: "Same-Day Delivery",
+    description: "Get your packages delivered same-day within Nairobi or next-day across Kenya.",
   },
   {
-    icon: Globe,
-    title: "Global Coverage",
-    description: "Ship to over 150+ countries worldwide with reliable international delivery.",
+    icon: MapPin,
+    title: "All 47 Counties",
+    description: "We deliver to every county in Kenya through our G4S logistics network.",
   },
   {
     icon: Shield,
-    title: "Secure Handling",
-    description: "Your packages are handled with care and covered by our comprehensive insurance.",
+    title: "G4S Secured",
+    description: "All shipments are transported by G4S, ensuring world-class security and handling.",
   },
   {
     icon: Headphones,
     title: "24/7 Support",
-    description: "Our dedicated support team is available around the clock to assist you.",
+    description: "Our Nairobi-based support team is available around the clock to assist you.",
   },
 ];
 

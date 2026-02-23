@@ -1,18 +1,18 @@
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { Check, Globe, Users, Award, TrendingUp } from "lucide-react";
+import { Check, MapPin, Users, Award, TrendingUp, Shield } from "lucide-react";
 
 const features = [
   "Real-time tracking on all shipments",
-  "Secure handling and insurance options",
-  "24/7 customer support",
-  "Competitive pricing with no hidden fees",
+  "G4S-secured transportation across Kenya",
+  "24/7 customer support based in Nairobi",
+  "Competitive KES pricing with no hidden fees",
 ];
 
 const stats = [
   { icon: Users, value: "50,000+", label: "Happy Customers" },
-  { icon: Globe, value: "150+", label: "Countries Served" },
-  { icon: Award, value: "10M+", label: "Packages Delivered" },
+  { icon: MapPin, value: "47", label: "Counties Covered" },
+  { icon: Award, value: "500K+", label: "Packages Delivered" },
   { icon: TrendingUp, value: "99.9%", label: "On-Time Delivery" },
 ];
 
@@ -25,7 +25,7 @@ export default function AboutPage() {
         <div className="bg-gradient-to-r from-purple to-purple-dark text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-3xl lg:text-4xl font-bold mb-4">About Antex Deliveries</h1>
-            <p className="text-purple-100 text-lg">Your trusted partner in global logistics since 2010</p>
+            <p className="text-purple-100 text-lg">Your trusted Kenyan delivery partner, powered by G4S logistics</p>
           </div>
         </div>
 
@@ -43,16 +43,18 @@ export default function AboutPage() {
               {/* Content */}
               <div className="space-y-6">
                 <h2 className="text-3xl font-bold text-gray-900">
-                  Delivering Excellence Worldwide
+                  Delivering Excellence Across Kenya
                 </h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Antex Deliveries has been at the forefront of logistics innovation for over a decade. 
-                  We combine cutting-edge technology with a global network to ensure your packages reach 
-                  their destination safely and on time.
+                  Antex Deliveries partners with G4S, the world-renowned security and logistics company, 
+                  to provide unmatched delivery services across all 47 counties of Kenya. We combine 
+                  cutting-edge technology with G4S&apos;s trusted transport network to ensure your packages 
+                  reach their destination safely and on time.
                 </p>
                 <p className="text-gray-600 leading-relaxed">
                   Our commitment to customer satisfaction, reliability, and transparency has made us 
-                  the preferred choice for individuals and businesses across 150+ countries.
+                  the preferred choice for individuals and businesses across Kenya — from Nairobi to 
+                  Mombasa, Kisumu to Eldoret, and everywhere in between.
                 </p>
 
                 {/* Feature List */}
@@ -102,8 +104,8 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Mission</h2>
             <p className="text-xl text-gray-600 leading-relaxed">
               To provide fast, reliable, and affordable delivery services that connect people and 
-              businesses across the globe. We strive to exceed expectations with every package we handle, 
-              making shipping simple and stress-free for everyone.
+              businesses across Kenya. Powered by G4S secure logistics, we strive to exceed expectations 
+              with every package we handle, making shipping simple and stress-free for everyone.
             </p>
           </div>
         </section>
@@ -136,11 +138,11 @@ export default function AboutPage() {
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Globe className="w-8 h-8 text-teal" />
+                  <Shield className="w-8 h-8 text-teal" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Global Reach</h3>
+                <h3 className="text-xl font-semibold mb-2">G4S Security</h3>
                 <p className="text-purple-100">
-                  With operations in 150+ countries, we bring the world closer together, one package at a time.
+                  With G4S handling transport across all 47 counties, your packages are in the safest hands in Kenya.
                 </p>
               </div>
             </div>

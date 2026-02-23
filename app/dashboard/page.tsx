@@ -237,7 +237,7 @@ export default function DashboardPage() {
                                   <span>Est. {format(new Date(shipment.estimated_delivery_date), "MMM d, yyyy")}</span>
                                 </div>
                               )}
-                              <p className="text-sm font-medium text-teal">${shipment.total_cost.toFixed(2)}</p>
+                              <p className="text-sm font-medium text-teal">KES {shipment.total_cost.toFixed(2)}</p>
                             </div>
                           </div>
                         </div>

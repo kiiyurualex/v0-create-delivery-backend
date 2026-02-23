@@ -35,9 +35,9 @@ interface ShipmentData {
 }
 
 const SHIPPING_OPTIONS = [
-  { id: "express", name: "Express Delivery", days: 1, basePrice: 25 },
-  { id: "standard", name: "Standard Shipping", days: 3, basePrice: 15 },
-  { id: "economy", name: "Economy Shipping", days: 7, basePrice: 8 },
+  { id: "g4s_express", name: "G4S Express", days: 1, basePrice: 800 },
+  { id: "g4s_standard", name: "G4S Standard", days: 3, basePrice: 450 },
+  { id: "g4s_economy", name: "G4S Economy", days: 5, basePrice: 250 },
 ];
 
 export function ShipmentForm() {
@@ -137,13 +137,6 @@ export function ShipmentForm() {
     try {
       const selectedOption = SHIPPING_OPTIONS.find(opt => opt.id === formData.shipping_option);
 
-      console.log("[v0] Booking shipment for user:", user.id);
-      console.log("[v0] Shipment data:", {
-        user_id: user.id,
-        origin: formData.origin_city,
-        destination: formData.destination_city,
-      });
-
       const { data, error } = await supabase
         .from("shipments")
         .insert({
@@ -174,15 +167,10 @@ export function ShipmentForm() {
         .single();
 
       if (error) {
-        console.error("[v0] Supabase error:", error);
-        console.error("[v0] Error code:", error.code);
-        console.error("[v0] Error message:", error.message);
         alert(`Failed to book shipment: ${error.message}`);
         setLoading(false);
         return;
       }
-
-      console.log("[v0] Shipment created successfully:", data);
 
       // Add initial tracking status
       const { error: trackingError } = await supabase.from("shipment_status_history").insert({
@@ -192,14 +180,8 @@ export function ShipmentForm() {
         notes: "Shipment booked, awaiting pickup",
       });
 
-      if (trackingError) {
-        console.error("[v0] Tracking error:", trackingError);
-      }
-
-      console.log("[v0] Redirecting to receipt with tracking:", data.tracking_number);
       router.push(`/receipt?tracking=${data.tracking_number}`);
-    } catch (err) {
-      console.error("[v0] Unexpected error:", err);
+    } catch {
       alert("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
@@ -229,7 +211,7 @@ export function ShipmentForm() {
                   <Label htmlFor="origin">From <span className="text-red-500">*</span></Label>
                   <Input
                     id="origin"
-                    placeholder="City, Country (e.g., Nairobi, Kenya)"
+                    placeholder="e.g., Nairobi, Westlands"
                     value={formData.origin_city}
                     onChange={(e) => setFormData({ ...formData, origin_city: e.target.value })}
                   />
@@ -238,7 +220,7 @@ export function ShipmentForm() {
                   <Label htmlFor="destination">To <span className="text-red-500">*</span></Label>
                   <Input
                     id="destination"
-                    placeholder="City, Country (e.g., Mombasa, Kenya)"
+                    placeholder="e.g., Mombasa, Nyali"
                     value={formData.destination_city}
                     onChange={(e) => setFormData({ ...formData, destination_city: e.target.value })}
                   />
@@ -324,7 +306,7 @@ export function ShipmentForm() {
                     <SelectContent>
                       {SHIPPING_OPTIONS.map((option) => (
                         <SelectItem key={option.id} value={option.id}>
-                          {option.name} ({option.days} {option.days === 1 ? "day" : "days"}) - ${option.basePrice}/kg
+                          {option.name} ({option.days} {option.days === 1 ? "day" : "days"}) - KES {option.basePrice}/kg
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -477,25 +459,25 @@ export function ShipmentForm() {
           <CardContent className="pt-6">
             {!calculated ? (
               <p className="text-gray-500 text-center py-4">
-                Fill in shipment details and click "Calculate Rates"
+                Fill in shipment details and click &quot;Calculate Rates&quot;
               </p>
             ) : (
               <div className="space-y-4">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Shipping</span>
-                  <span className="font-medium">${costs.shipping.toFixed(2)}</span>
+                  <span className="font-medium">KES {costs.shipping.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Insurance</span>
-                  <span className="font-medium">${costs.insurance.toFixed(2)}</span>
+                  <span className="font-medium">KES {costs.insurance.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Tax (16%)</span>
-                  <span className="font-medium">${costs.tax.toFixed(2)}</span>
+                  <span className="text-gray-600">VAT (16%)</span>
+                  <span className="font-medium">KES {costs.tax.toFixed(2)}</span>
                 </div>
                 <div className="border-t pt-4 flex justify-between">
                   <span className="font-semibold">Total</span>
-                  <span className="font-bold text-lg text-teal">${costs.total.toFixed(2)}</span>
+                  <span className="font-bold text-lg text-teal">KES {costs.total.toFixed(2)}</span>
                 </div>
               </div>
             )}

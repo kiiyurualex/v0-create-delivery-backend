@@ -15,7 +15,7 @@ export function Footer() {
               <span className="text-xl font-bold">Antex Deliveries</span>
             </div>
             <p className="text-purple-200 text-sm">
-              Your trusted partner in global logistics since 2010. Fast, reliable, and secure delivery services worldwide.
+              Kenya&apos;s trusted delivery partner. Fast, reliable, and G4S-secured delivery services across all 47 counties.
             </p>
           </div>
 
@@ -34,9 +34,9 @@ export function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Services</h3>
             <ul className="space-y-2 text-purple-200 text-sm">
-              <li>Express Delivery</li>
-              <li>Standard Shipping</li>
-              <li>International Shipping</li>
+              <li>G4S Express Delivery</li>
+              <li>G4S Standard Shipping</li>
+              <li>G4S Economy Shipping</li>
               <li>Package Insurance</li>
             </ul>
           </div>

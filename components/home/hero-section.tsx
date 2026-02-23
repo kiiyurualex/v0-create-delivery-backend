@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Check, Clock, Truck } from "lucide-react";
+import { Check, Clock, Truck, Shield } from "lucide-react";
 
 export function HeroSection() {
   return (
@@ -10,17 +10,17 @@ export function HeroSection() {
           {/* Left Content */}
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm">
-              <span className="text-orange">★</span>
-              <span>Trusted by 50,000+ Customers Worldwide</span>
+              <Shield className="w-4 h-4 text-orange" />
+              <span>Powered by G4S Secure Logistics</span>
             </div>
             
-            <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
-              Fast & Reliable{" "}
-              <span className="text-teal">Delivery Services</span>
+            <h1 className="text-4xl lg:text-5xl font-bold leading-tight text-balance">
+              Fast & Secure{" "}
+              <span className="text-teal">Local Deliveries</span>
             </h1>
             
-            <p className="text-purple-100 text-lg max-w-md">
-              Experience lightning-fast delivery with real-time tracking. Your packages, delivered safely and on time, every time.
+            <p className="text-purple-100 text-lg max-w-md leading-relaxed">
+              Ship across Kenya with G4S-powered security and real-time tracking. From Nairobi to Mombasa, Kisumu to Nakuru — delivered safely, every time.
             </p>
             
             <div className="flex flex-wrap gap-4">
@@ -39,7 +39,7 @@ export function HeroSection() {
             {/* Stats */}
             <div className="flex gap-8 pt-8">
               <div>
-                <div className="text-3xl font-bold text-teal">10M+</div>
+                <div className="text-3xl font-bold text-teal">500K+</div>
                 <div className="text-purple-200 text-sm">Deliveries</div>
               </div>
               <div>
@@ -47,8 +47,8 @@ export function HeroSection() {
                 <div className="text-purple-200 text-sm">On-Time</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-teal">150+</div>
-                <div className="text-purple-200 text-sm">Countries</div>
+                <div className="text-3xl font-bold text-teal">47</div>
+                <div className="text-purple-200 text-sm">Counties</div>
               </div>
             </div>
           </div>
@@ -74,7 +74,12 @@ export function HeroSection() {
                 <span className="font-medium">Package Delivered</span>
               </div>
               
-              <div className="absolute bottom-10 left-10 bg-white text-gray-800 rounded-lg shadow-lg px-4 py-3 flex items-center gap-2">
+              <div className="absolute bottom-20 left-4 bg-white text-gray-800 rounded-lg shadow-lg px-4 py-3 flex items-center gap-2">
+                <Shield className="w-5 h-5 text-purple" />
+                <span className="font-medium text-sm">G4S Secured</span>
+              </div>
+              
+              <div className="absolute bottom-4 right-20 bg-white text-gray-800 rounded-lg shadow-lg px-4 py-3 flex items-center gap-2">
                 <Clock className="w-5 h-5 text-teal" />
                 <span className="font-medium">Arriving in 15 min</span>
               </div>
