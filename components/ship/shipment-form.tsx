@@ -22,6 +22,10 @@ interface ShipmentData {
   package_count: number;
   package_weight: number;
   weight_unit: string;
+  package_length: number;
+  package_width: number;
+  package_height: number;
+  dimension_unit: string;
   add_insurance: boolean;
   sender_name: string;
   sender_email: string;
@@ -55,6 +59,10 @@ export function ShipmentForm() {
     package_count: 1,
     package_weight: 0,
     weight_unit: "kg",
+    package_length: 0,
+    package_width: 0,
+    package_height: 0,
+    dimension_unit: "cm",
     add_insurance: false,
     sender_name: "",
     sender_email: "",
@@ -290,6 +298,58 @@ export function ShipmentForm() {
                         </SelectContent>
                       </Select>
                     </div>
+                  </div>
+                </div>
+
+                {/* Package Dimensions */}
+                <div className="space-y-2">
+                  <Label>Package Dimensions (L x W x H)</Label>
+                  <div className="flex gap-2 items-end">
+                    <div className="flex-1 space-y-1">
+                      <span className="text-xs text-muted-foreground">Length</span>
+                      <Input
+                        type="number"
+                        step="0.1"
+                        min="0"
+                        placeholder="0"
+                        value={formData.package_length || ""}
+                        onChange={(e) => setFormData({ ...formData, package_length: parseFloat(e.target.value) || 0 })}
+                      />
+                    </div>
+                    <div className="flex-1 space-y-1">
+                      <span className="text-xs text-muted-foreground">Width</span>
+                      <Input
+                        type="number"
+                        step="0.1"
+                        min="0"
+                        placeholder="0"
+                        value={formData.package_width || ""}
+                        onChange={(e) => setFormData({ ...formData, package_width: parseFloat(e.target.value) || 0 })}
+                      />
+                    </div>
+                    <div className="flex-1 space-y-1">
+                      <span className="text-xs text-muted-foreground">Height</span>
+                      <Input
+                        type="number"
+                        step="0.1"
+                        min="0"
+                        placeholder="0"
+                        value={formData.package_height || ""}
+                        onChange={(e) => setFormData({ ...formData, package_height: parseFloat(e.target.value) || 0 })}
+                      />
+                    </div>
+                    <Select
+                      value={formData.dimension_unit}
+                      onValueChange={(value) => setFormData({ ...formData, dimension_unit: value })}
+                    >
+                      <SelectTrigger className="w-20">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="cm">cm</SelectItem>
+                        <SelectItem value="in">in</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
 
