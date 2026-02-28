@@ -8,8 +8,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Antex Deliveries - Fast & Reliable Delivery Services',
-  description: 'Experience lightning-fast delivery with real-time tracking. Your packages, delivered safely and on time, every time.',
+  title: 'Antex Deliveries - G4S Powered Delivery Across Kenya',
+  description: 'Ship across all 47 counties in Kenya with G4S-secured transport. Real-time tracking, KES pricing, same-day delivery in Nairobi.',
   generator: 'v0.app',
   viewport: {
     width: 'device-width',
