@@ -1,15 +1,14 @@
 import React from "react"
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Antex Deliveries - G4S Powered Delivery Across Kenya',
-  description: 'Ship across all 47 counties in Kenya with G4S-secured transport. Real-time tracking, KES pricing, same-day delivery in Nairobi.',
+  title: 'Antex Deliveries - Fast & Reliable Delivery Services',
+  description: 'Experience lightning-fast delivery with real-time tracking. Your packages, delivered safely and on time, every time.',
   generator: 'v0.app',
   viewport: {
     width: 'device-width',
@@ -42,11 +41,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          {children}
-        </ThemeProvider>
+    <html lang="en">
+      <body className="font-sans antialiased">
+        {children}
       </body>
     </html>
   )
