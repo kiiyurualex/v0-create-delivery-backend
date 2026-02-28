@@ -33,12 +33,24 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (
-    request.nextUrl.pathname.startsWith('/dashboard') &&
-    !user
-  ) {
+  // Protect dashboard and ship routes - redirect unauthenticated users to login
+  const protectedPaths = ['/dashboard', '/ship']
+  const isProtected = protectedPaths.some(path => request.nextUrl.pathname.startsWith(path))
+
+  if (isProtected && !user) {
     const url = request.nextUrl.clone()
     url.pathname = '/auth/login'
+    url.searchParams.set('redirect', request.nextUrl.pathname)
+    return NextResponse.redirect(url)
+  }
+
+  // Redirect logged-in users away from auth pages to home
+  const authPaths = ['/auth/login', '/auth/sign-up']
+  const isAuthPage = authPaths.some(path => request.nextUrl.pathname.startsWith(path))
+
+  if (isAuthPage && user) {
+    const url = request.nextUrl.clone()
+    url.pathname = '/'
     return NextResponse.redirect(url)
   }
 

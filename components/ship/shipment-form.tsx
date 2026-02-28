@@ -25,7 +25,6 @@ interface ShipmentData {
   package_length: number;
   package_width: number;
   package_height: number;
-  dimension_unit: string;
   add_insurance: boolean;
   sender_name: string;
   sender_email: string;
@@ -62,7 +61,6 @@ export function ShipmentForm() {
     package_length: 0,
     package_width: 0,
     package_height: 0,
-    dimension_unit: "cm",
     add_insurance: false,
     sender_name: "",
     sender_email: "",
@@ -102,7 +100,7 @@ export function ShipmentForm() {
     const selectedOption = SHIPPING_OPTIONS.find(opt => opt.id === formData.shipping_option);
     if (!selectedOption) return;
 
-    const weightInKg = formData.weight_unit === "lb" ? formData.package_weight * 0.453592 : formData.package_weight;
+    const weightInKg = formData.weight_unit === "g" ? formData.package_weight / 1000 : formData.package_weight;
     const shippingCost = selectedOption.basePrice * weightInKg * formData.package_count;
     const insuranceCost = formData.add_insurance ? shippingCost * 0.05 : 0;
     const taxAmount = (shippingCost + insuranceCost) * 0.16;
@@ -154,7 +152,7 @@ export function ShipmentForm() {
           packaging_type: formData.packaging_type,
           num_packages: formData.package_count,
           weight: formData.package_weight,
-          weight_unit: formData.weight_unit,
+          weight_unit: formData.weight_unit === "g" ? "g" : "kg",
           has_insurance: formData.add_insurance,
           sender_name: formData.sender_name,
           sender_email: formData.sender_email,
@@ -273,14 +271,14 @@ export function ShipmentForm() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="weight">Package Weight <span className="text-red-500">*</span></Label>
+                    <Label htmlFor="weight">Weight (kg) <span className="text-red-500">*</span></Label>
                     <div className="flex gap-2">
                       <Input
                         id="weight"
                         type="number"
-                        step="0.1"
+                        step="0.01"
                         min="0"
-                        placeholder="0.0"
+                        placeholder="e.g. 2.5 kg"
                         value={formData.package_weight || ""}
                         onChange={(e) => setFormData({ ...formData, package_weight: parseFloat(e.target.value) || 0 })}
                         className="flex-1"
@@ -294,7 +292,7 @@ export function ShipmentForm() {
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="kg">kg</SelectItem>
-                          <SelectItem value="lb">lb</SelectItem>
+                          <SelectItem value="g">g</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -303,53 +301,41 @@ export function ShipmentForm() {
 
                 {/* Package Dimensions */}
                 <div className="space-y-2">
-                  <Label>Package Dimensions (L x W x H)</Label>
+                  <Label>Dimensions in cm (L x W x H)</Label>
                   <div className="flex gap-2 items-end">
                     <div className="flex-1 space-y-1">
-                      <span className="text-xs text-muted-foreground">Length</span>
+                      <span className="text-xs text-muted-foreground">Length (cm)</span>
                       <Input
                         type="number"
                         step="0.1"
                         min="0"
-                        placeholder="0"
+                        placeholder="e.g. 30"
                         value={formData.package_length || ""}
                         onChange={(e) => setFormData({ ...formData, package_length: parseFloat(e.target.value) || 0 })}
                       />
                     </div>
                     <div className="flex-1 space-y-1">
-                      <span className="text-xs text-muted-foreground">Width</span>
+                      <span className="text-xs text-muted-foreground">Width (cm)</span>
                       <Input
                         type="number"
                         step="0.1"
                         min="0"
-                        placeholder="0"
+                        placeholder="e.g. 20"
                         value={formData.package_width || ""}
                         onChange={(e) => setFormData({ ...formData, package_width: parseFloat(e.target.value) || 0 })}
                       />
                     </div>
                     <div className="flex-1 space-y-1">
-                      <span className="text-xs text-muted-foreground">Height</span>
+                      <span className="text-xs text-muted-foreground">Height (cm)</span>
                       <Input
                         type="number"
                         step="0.1"
                         min="0"
-                        placeholder="0"
+                        placeholder="e.g. 15"
                         value={formData.package_height || ""}
                         onChange={(e) => setFormData({ ...formData, package_height: parseFloat(e.target.value) || 0 })}
                       />
                     </div>
-                    <Select
-                      value={formData.dimension_unit}
-                      onValueChange={(value) => setFormData({ ...formData, dimension_unit: value })}
-                    >
-                      <SelectTrigger className="w-20">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="cm">cm</SelectItem>
-                        <SelectItem value="in">in</SelectItem>
-                      </SelectContent>
-                    </Select>
                   </div>
                 </div>
 
